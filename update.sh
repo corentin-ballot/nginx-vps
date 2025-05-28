@@ -37,7 +37,8 @@ if [ "$LOCAL" = "$BASE" ]; then
     fi
 
     # Check nginx configuration syntax
-    if [nginx -t]; then
+    nginx -t
+    if [ $? -eq 0 ]; then
         echo "[$DATE] Nginx configuration syntax is valid." | tee -a "$LOG_FILE"
         systemctl reload nginx
         if [ $? -eq 0 ]; then

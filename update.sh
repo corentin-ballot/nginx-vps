@@ -19,7 +19,9 @@ LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
 BASE=$(git merge-base @ @{u})
 
-if [ "$LOCAL" = "$BASE" ]; then
+if [ "$LOCAL" = "$REMOTE" ]; then
+    # Up-to-date, no changes to apply
+elif [ "$LOCAL" = "$BASE" ]; then
     # Update the local repository
     git pull origin main  
     if [ $? -ne 0 ]; then
